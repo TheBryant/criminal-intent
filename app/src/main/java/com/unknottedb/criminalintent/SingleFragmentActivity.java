@@ -4,10 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-
-/**
- * Created by Beef Wellington on 7/22/2014.
- */
 public abstract class SingleFragmentActivity extends FragmentActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +18,6 @@ public abstract class SingleFragmentActivity extends FragmentActivity{
                     .add(R.id.fragmentContainer, fragment)
                     .commit();
         }
-
     }
 
     protected abstract Fragment createFragment();
