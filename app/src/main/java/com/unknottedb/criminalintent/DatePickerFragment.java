@@ -24,7 +24,6 @@ public class DatePickerFragment extends DialogFragment{
 
         DatePickerFragment fragment = new DatePickerFragment();
         fragment.setArguments(args);
-
         return fragment;
     }
 

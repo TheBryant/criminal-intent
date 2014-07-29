@@ -19,14 +19,17 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.UUID;
 
 
 public class CrimeFragment extends Fragment {
     public static final String EXTRA_CRIME_ID = "com.unknottedb.criminalintent.crime_id";
-    private static final String DIALOG_DATE = "date";
-    private static final int REQUEST_DATE = 0;
+    public static final String DIALOG_DATE = "date";
+    public static final String DIALOG_TIME = "time";
+    public static final int REQUEST_DATE = 0;
+    public static final int REQUEST_TIME = 1;
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
@@ -66,7 +69,7 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
+                DateTimeFragment dialog = DateTimeFragment.newInstance(mCrime.getDate());
                 dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
                 dialog.show(fm, DIALOG_DATE);
             }
@@ -92,6 +95,11 @@ public class CrimeFragment extends Fragment {
             mCrime.setDate(date);
             updateDate();
         }
+        if (requestCode == REQUEST_TIME){
+            Date date = (Date)data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
+            mCrime.setDate(date);
+            updateDate();
+        }
     }
 
     public static CrimeFragment newInstance(UUID crimeID){
@@ -105,7 +113,8 @@ public class CrimeFragment extends Fragment {
     }
 
     private void updateDate(){
-        mDateButton.setText(mCrime.getDate().toString());
+        String dateString = DateFormat.getDateTimeInstance().format(mCrime.getDate());
+        mDateButton.setText(dateString);
     }
 
     public interface OnFragmentInteractionListener {

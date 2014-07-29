@@ -19,6 +19,7 @@ import com.unknottedb.criminalintent.dummy.DummyContent;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 
 public class CrimeListFragment extends ListFragment implements CrimeFragment.OnFragmentInteractionListener{
@@ -65,7 +66,8 @@ public class CrimeListFragment extends ListFragment implements CrimeFragment.OnF
             TextView titleTextView = (TextView)convertView.findViewById(R.id.crime_list_item_titleTextView);
             titleTextView.setText(c.getTitle());
             TextView dateTextView = (TextView)convertView.findViewById(R.id.crime_list_item_dateTextView);
-            dateTextView.setText(c.getDate().toString());
+            String dateString = DateFormat.getDateTimeInstance().format(c.getDate());
+            dateTextView.setText(dateString);
             CheckBox solvedCheckBox =  (CheckBox)convertView.findViewById(R.id.crime_list_item_solvedCheckBox);
             solvedCheckBox.setChecked(c.isSolved());
 
